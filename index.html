@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050706">
+  <title>MEMORY ARCHIVE // WIRED484</title>
+  
+  <style>
+:root{--bg:#050706;
+      --green:#a5ff00;
+      --pink:#f05bff;
+      --muted:#7d897b;
+      --panel:#0b100d;
+      --line:#263526}
+
+    
+*{box-sizing:border-box;margin:0;padding:0}
+    
+body{background:var(--bg);
+     color:#e5eee4;
+     font-family:"Courier New",monospace;
+     min-height:100vh;
+     overflow-x:hidden}
+    
+body:before{content:"";
+            position:fixed;
+            inset:0;
+            z-index:10;
+            pointer-events:none;
+            opacity:.12;
+            background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,#b5ffc0 4px)}
+    
+body:after{content:"";
+           position:fixed;
+           inset:0;
+           z-index:-1;
+           pointer-events:none;
+           background:radial-gradient(ellipse at 75% 40%,#32103c 0%,transparent 40%),radial-gradient(ellipse at 15% 80%,#163009 0%,transparent 35%)}
+    
+a{color:inherit;
+  text-decoration:none}
+    
+nav{position:relative;
+    z-index:20;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+    padding:24px 7%;
+    border-bottom:1px solid var(--line);
+    background:#050706dd}
+    
+.logo{color:var(--green);
+      font-weight:bold;
+      letter-spacing:3px;
+      text-shadow:0 0 12px #a5ff0066}
+    
+.nav-links{display:flex;
+           gap:18px;
+           flex-wrap:wrap;
+           font-size:10px;
+           color:var(--muted)}
+    
+.nav-links a:hover{color:var(--pink)}
+    
+main{padding:75px 7%;min-height:75vh}
+    
+.status,.eyebrow{font-size:11px;
+                 letter-spacing:3px;
+                 color:var(--green);
+            margin-bottom:24px}
+    
+.status:before{content:"● ";
+               animation:blink 1s steps(2) infinite}
+    
+h1{font-size:clamp(45px,9vw,95px);
+   line-height:.92;
+   letter-spacing:-5px;
+   color:#edf5eb;
+   text-shadow:4px 0 var(--pink),-3px 0 #a5ff0066;
+   margin-bottom:28px;
+   animation:flicker 5s infinite}
+    
+h1 span{display:block;
+        color:var(--green);
+        font-size:.35em;
+        letter-spacing:4px;
+        margin-top:22px;
+        line-height:1.5}
+    
+h2{font-size:clamp(27px,5vw,43px);
+   font-weight:normal;
+   margin-bottom:18px}
+    
+.description{max-width:650px;
+             color:#929d90;
+             font-size:13px;
+             line-height:2;
+             margin-bottom:30px}
+    
+.panel{border:1px solid #334b2d;
+       background:#080d08;
+       padding:25px;
+       max-width:760px;
+       margin-top:25px}
+    
+.panel-head{color:var(--pink);
+            font-size:11px;
+            border-bottom:1px solid var(--line);
+            padding-bottom:15px;
+            margin-bottom:18px}
+    
+.data{display:grid;
+      grid-template-columns:165px 1fr;gap:15px;
+      padding:12px 0;border-bottom:1px dashed var(--line);
+      font-size:12px;line-height:1.8}
+    
+.data:last-child{border-bottom:0}
+    .key{color:var(--green)}
+    .value{color:#b6beb3}
+    
+.tags{display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px}
+    
+    .tag{border:1px solid #334b2d;
+         color:var(--green);
+         padding:9px 12px;
+         font-size:11px}
+    
+.memory-grid{display:grid;
+             grid-template-columns:repeat(2,minmax(0,1fr));
+             gap:15px;margin-top:25px}
+    
+.memory{border:1px solid var(--line);
+        background:#090d0a;
+        padding:22px;
+        min-height:155px}
+    
+.date{font-size:10px;
+      color:var(--green);
+      margin-bottom:18px}
+    .memory h3{color:var(--pink);
+               font-size:15px;
+               margin-bottom:12px}
+    .memory p{color:#899287;
+              font-size:12px;
+              line-height:1.9}
+
+    
+.quote{border-left:2px solid var(--pink);
+       padding:12px 0 12px 24px;
+       margin-top:35px;
+       color:#c5b4c7;
+       line-height:2;
+       font-size:13px;
+       max-width:650px}
+    
+.btn{display:inline-block;
+     border:1px solid var(--green);
+     color:var(--green);
+     padding:13px 18px;
+     font:inherit;
+     font-size:11px;background:transparent;
+     margin-top:28px}
+    
+.btn:hover{background:var(--green);
+           color:#050706}
+    
+footer{border-top:1px solid var(--line);
+       padding:28px 7%;
+       display:flex;
+       justify-content:space-between;
+       flex-wrap:wrap;
+       gap:15px;
+       color:#687364;
+       font-size:10px;
+       letter-spacing:1px}
+    
+footer span{color:var(--green)}
+    
+@keyframes blink{50%{opacity:0}}@keyframes flicker{0%,94%,96%,100%{opacity:1}95%{opacity:.65}97%{opacity:.85}}
+    
+@media(max-width:700px){nav{padding:20px 5%}main{padding:60px 6%}h1{letter-spacing:-3px}
+                        .data{grid-template-columns:1fr;gap:3px}
+                        .memory-grid{grid-template-columns:1fr}
+                        .nav-links{gap:12px;font-size:9px}}
+    
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important}}
+    
+</style>
+</head>
+  
+<body>
+  <nav>
+    <a href="index.html" class="logo">WIRED<span>//</span>484</a>
+    <div class="nav-links"><a href="https://laincelcore.github.io/wired/">HOME</a>
+      <a href="https://laincelcore.github.io/layer01/">LAYER 01</a>
+      <a href="https://laincelcore.github.io/layer02/">LAYER 02</a>
+      <a href="https://laincelcore.github.io/memory-archive/">MEMORY ARCHIVE</a>
+    </div>
+  
+  </nav>
+  
+  <main>
+<div class="status">MEMORY STORAGE FOUND</div><div class="eyebrow">ARCHIVE 03 // PERSONAL LOGS</div>
+<h1>MEMORY ARCHIVE<span>FRAGMENTS OF TIME_</span></h1>
+<p class="description">Not every memory has to be important to be worth keeping. .</p>
+<div class="memory-grid">
+<article class="memory"><div class="date">LOG_001 // [DATE]</div><h3>[A favorite memory]</h3><p>[Write about a moment you want to keep.]</p></article>
+<article class="memory"><div class="date">LOG_002 // [DATE]</div><h3>[A person or place]</h3><p>[An inside joke, a day out, or somewhere that feels like home.]</p></article>
+<article class="memory"><div class="date">LOG_003 // [DATE]</div><h3>[A moment worth keeping]</h3><p>[Add another memory here.]</p></article>
+<article class="memory"><div class="date">LOG_004 // [DATE]</div><h3>[For future me]</h3><p>[Leave a note for your future self.]</p></article>
+  
+</div>
+    <div class="quote">Memory is imperfect. Maybe that's what makes it ours.</div><a class="btn" href="https://laincelcore.github.io/wired/">← RETURN HOME</a>
+    
+</main>
+  
+  <footer>
+    
+    <div>WIRED//404 — <span>STAY CONNECTED.</span></div><div>PERSONAL DIGITAL ARCHIVE · 2026</div>
+  
+  </footer>
+</body>
+</html>
