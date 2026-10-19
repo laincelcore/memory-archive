@@ -189,6 +189,154 @@ footer span{color:var(--green)}
                         .nav-links{gap:12px;font-size:9px}}
     
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important}}
+
+
+
+
+/* typinh animation */
+
+.memory-grid {
+  align-items: start;
+}
+
+.memory {
+  position: relative;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  min-width: 0;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: memoryAppear .5s ease forwards;
+}
+
+.memory::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #f05bff0c,
+    #a5ff000b,
+    transparent
+  );
+  animation: memoryScan 7s linear infinite;
+}
+
+.memory h3,
+.memory p {
+  overflow-wrap: anywhere;
+}
+
+.memory h3 {
+  line-height: 1.7;
+}
+
+.memory p {
+  min-height: 45px;
+}
+
+.archive-loading {
+  grid-column: 1 / -1;
+  padding: 25px 0;
+  color: var(--green);
+  font-size: 11px;
+  letter-spacing: 2px;
+  animation: flicker 2s infinite;
+}
+
+.loading-dot {
+  color: var(--pink);
+}
+
+.archive-status {
+  margin-top: 20px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+.memory.corrupted {
+  border-color: var(--pink);
+  animation: memoryAppear .5s ease forwards, corruptionGlitch .3s steps(2) 2;
+}
+
+.memory.corrupted h3 {
+  color: var(--green);
+  text-shadow: 2px 0 var(--pink);
+}
+
+.memory.corrupted p {
+  color: var(--pink);
+}
+
+.memory-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 13px;
+  margin-left: 3px;
+  background: var(--green);
+  vertical-align: middle;
+  animation: cursorBlink .7s steps(2) infinite;
+}
+
+.memory-separator {
+  grid-column: 1 / -1;
+  padding: 18px 0;
+  border-top: 1px dashed var(--line);
+  border-bottom: 1px dashed var(--line);
+  color: var(--pink);
+  font-size: 12px;
+  letter-spacing: 4px;
+  overflow-wrap: anywhere;
+}
+
+.memory-separator span {
+  color: var(--muted);
+  letter-spacing: 1px;
+  font-size: 10px;
+}
+
+@keyframes memoryAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes memoryScan {
+  0% { left: -100%; }
+  20%, 100% { left: 150%; }
+}
+
+@keyframes corruptionGlitch {
+  0% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); filter: brightness(1.8); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes cursorBlink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .memory,
+  .memory::after,
+  .memory-separator,
+  .memory-cursor,
+  .archive-loading {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+
     
 </style>
 </head>
@@ -208,16 +356,230 @@ footer span{color:var(--green)}
 <div class="status">MEMORY STORAGE FOUND</div><div class="eyebrow">ARCHIVE 03 // PERSONAL LOGS</div>
 <h1>MEMORY ARCHIVE<span>FRAGMENTS OF TIME_</span></h1>
 <p class="description">Not every memory has to be important to be worth keeping. .</p>
-<div class="memory-grid">
-<article class="memory"><div class="date">LOG_001 // [DATE]</div><h3>[A favorite memory]</h3><p>[Write about a moment you want to keep.]</p></article>
-<article class="memory"><div class="date">LOG_002 // [DATE]</div><h3>[A person or place]</h3><p>[An inside joke, a day out, or somewhere that feels like home.]</p></article>
-<article class="memory"><div class="date">LOG_003 // [DATE]</div><h3>[A moment worth keeping]</h3><p>[Add another memory here.]</p></article>
-<article class="memory"><div class="date">LOG_004 // [DATE]</div><h3>[For future me]</h3><p>[Leave a note for your future self.]</p></article>
-  
+
+<div class="memory-grid" id="memoryGrid">
+  <div class="archive-loading">
+    <span class="loading-dot">●</span> ACCESSING MEMORY STORAGE...
+  </div>
+</div>
+<div class="archive-status" id="archiveStatus">
+  MEMORY RECOVERY: 0 / 044
+</div>
+
 </div>
     <div class="quote">Memory is imperfect. Maybe that's what makes it ours.</div><a class="btn" href="https://laincelcore.github.io/wired/">← RETURN HOME</a>
     
 </main>
+
+
+
+<script>
+const memories = [
+  ["TODAY I WALKED AT THE PARK AT NIGHT.", "The path was quiet. The streetlights made everything look unreal."],
+  ["I DREW A TREE I SAW TODAY.", "I tried to remember every branch, even after I got home."],
+  ["THE SKY LOOKED STRANGE THIS EVENING.", "For a moment, I thought the clouds were moving in reverse."],
+  ["I LISTENED TO MY FAVORITE SONG AGAIN.", "It felt different tonight, like I was hearing it from another room."],
+  ["I SAW A CAT NEAR THE ROAD.", "It looked at me like it recognized me."],
+  ["I FORGOT WHAT I WANTED TO SAY.", "The thought was there a second ago. Then nothing."],
+  ["I WATCHED THE RAIN FROM THE WINDOW.", "Every drop made the outside world blur a little more."],
+  ["I FOUND AN OLD PICTURE.", "I remember the place, but not how I felt that day."],
+  ["I LAUGHED AT SOMETHING SILLY.", "I wish I could save the sound of it somewhere."],
+  ["I STAYED UP LATER THAN I PLANNED.", "The house feels like a different place after midnight."],
+  ["I SAW THE MOON BETWEEN THE CLOUDS.", "It looked closer than it should have."],
+  ["I TALKED WITH SOMEONE I MISSED.", "A small conversation made the day feel lighter."],
+  ["I MADE A DRINK AND FORGOT ABOUT IT.", "When I remembered, it had gone cold."],
+  ["I WALKED HOME A DIFFERENT WAY.", "Every corner looked familiar, but somehow wrong."],
+  ["I TRIED DRAWING WITHOUT A PLAN.", "The lines became something I hadn't expected."],
+  ["I HEARD A NOISE OUTSIDE.", "I checked the window. There was nobody there."],
+  ["I FOUND A SONG I HAD FORGOTTEN.", "The first few notes brought back a whole afternoon."],
+  ["I WATCHED THE LIGHT CHANGE ON THE WALL.", "It was ordinary. I wanted to remember it anyway."],
+  ["I SENT A MESSAGE AND WAITED.", "The little notification sound felt louder than usual."],
+  ["I THOUGHT ABOUT WHO I USED TO BE.", "I wonder if that version of me would recognize me now."],
+  ["I SAW A BIRD ON A WIRE.", "It stayed there for a long time, watching the street."],
+  ["I CLEANED A CORNER OF MY ROOM.", "I found things I thought I had lost."],
+  ["I COULDN'T SLEEP FOR A WHILE.", "My thoughts kept repeating like a broken recording."],
+  ["I WATCHED THE SUNSET FADE.", "The colors disappeared before I was ready."],
+  ["I MADE A SMALL MISTAKE TODAY.", "It felt huge for five minutes. Then it didn't."],
+  ["I SAW A TREE I HAD NEVER NOTICED.", "Maybe it had always been there."],
+  ["I REMEMBERED A DREAM.", "By breakfast, most of it was already gone."],
+  ["I SPENT SOME TIME ALONE.", "It was quiet in a way I needed."],
+  ["I HEARD SOMEONE SAY MY NAME.", "I turned around, but nobody seemed to be calling me."],
+  ["I TOOK A LONGER LOOK AT THE STARS.", "I tried to imagine how far away everything was."],
+  ["I FOUND A NOTE IN MY DRAWER.", "I don't remember writing it, but the handwriting looked like mine."],
+  ["I WATCHED PEOPLE PASS BY.", "Everyone seemed to be carrying a world I couldn't see."],
+  ["I SMILED AT A MEMORY.", "It came back so clearly that it almost felt present."],
+  ["I HEARD THE WIND THROUGH THE TREES.", "For a second, it sounded like a distant voice."],
+  ["I DREW UNTIL MY HAND GOT TIRED.", "The page was messy, but I liked it that way."],
+  ["I LOOKED AT THE CLOCK AT 3:03.", "I looked away, then checked it again for no reason."],
+  ["I WALKED PAST THE PARK AGAIN.", "The bench was empty. I thought about yesterday."],
+  ["I HAD A DAY THAT FELT ORDINARY.", "Maybe ordinary days are the ones worth keeping."],
+  ["I TRIED TO REMEMBER A FACE.", "The details kept changing every time I pictured it."],
+  ["I WATCHED THE CITY LIGHTS FROM FAR AWAY.", "They looked like tiny signals in a dark network."],
+  ["I SAVED A LITTLE THING JUST BECAUSE.", "I don't know why it matters to me yet."],
+  ["I THOUGHT I HEARD A NOTIFICATION.", "My screen was dark. There was no new message."],
+  ["I LOOKED BACK ON THIS WEEK.", "So many small moments had already started to fade."],
+  ["I AM WRITING THIS BEFORE I FORGET.", "If I read this again someday, I hope I remember how today felt."]
+];
+
+const interruptions = [
+  "WHO IS REMEMBERING THIS?",
+  "THIS MEMORY DOES NOT BELONG TO YOU.",
+  "???",
+  "I SAW YOU AT THE PARK.",
+  "WHY DID YOU FORGET?",
+  "MEMORY FRAGMENT NOT FOUND.",
+  "YOU WERE NOT ALONE.",
+  "DO YOU REMEMBER ME?",
+  "THIS FILE WAS ALREADY HERE.",
+  "I REMEMBER SOMETHING DIFFERENT.",
+  "??? // USER UNKNOWN",
+  "STOP TRYING TO REMEMBER."
+];
+
+const grid = document.getElementById("memoryGrid");
+const archiveStatus = document.getElementById("archiveStatus");
+
+let logIndex = 0;
+let interruptionIndex = 0;
+let stopped = false;
+
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function typeText(element, text, speed = 28) {
+  return new Promise(resolve => {
+    let i = 0;
+    const cursor = document.createElement("span");
+    cursor.className = "memory-cursor";
+    element.textContent = "";
+    element.appendChild(cursor);
+
+    function typeNext() {
+      if (stopped || !element.isConnected) {
+        cursor.remove();
+        resolve();
+        return;
+      }
+
+      if (i < text.length) {
+        element.insertBefore(
+          document.createTextNode(text[i]),
+          cursor
+        );
+        i++;
+        setTimeout(typeNext, speed + Math.random() * 25);
+      } else {
+        cursor.remove();
+        resolve();
+      }
+    }
+
+    typeNext();
+  });
+}
+
+async function addInterruption() {
+  const separator = document.createElement("div");
+  separator.className = "memory-separator";
+  grid.appendChild(separator);
+
+  const message = interruptions[
+    interruptionIndex % interruptions.length
+  ];
+  interruptionIndex++;
+
+  const line = document.createElement("div");
+  separator.appendChild(line);
+
+  const metadata = document.createElement("span");
+  metadata.textContent = " // SIGNAL INTERRUPTED";
+  separator.appendChild(document.createElement("br"));
+  separator.appendChild(metadata);
+
+  await typeText(line, message, 65);
+
+  await wait(900);
+
+  // Sometimes the message corrupts
+  if (Math.random() > 0.55) {
+    line.textContent = "???";
+    separator.classList.add("corrupted");
+  }
+
+  await wait(1000);
+}
+
+async function addMemory(index) {
+  const [title, description] = memories[index];
+
+  const card = document.createElement("article");
+  card.className = "memory";
+  card.style.animationDelay = "0s";
+
+  const date = document.createElement("div");
+  date.className = "date";
+  date.textContent = "LOG_" +
+    String(index + 1).padStart(3, "0") +
+    " // " + new Date().toLocaleDateString();
+
+  const heading = document.createElement("h3");
+  const paragraph = document.createElement("p");
+
+  card.append(date, heading, paragraph);
+  grid.appendChild(card);
+
+  await typeText(heading, title, 24);
+  await wait(250);
+  await typeText(paragraph, description, 17);
+
+  archiveStatus.textContent =
+    "MEMORY RECOVERY: " +
+    String(index + 1).padStart(2, "0") +
+    " / 044";
+
+  // Keep 
+  card.scrollIntoView({
+    behavior: "smooth",
+    block: "nearest"
+  });
+}
+
+async function runArchive() {
+  grid.innerHTML = "";
+
+  for (let i = 0; i < memories.length; i++) {
+    if (stopped) return;
+
+    await addMemory(i);
+    await wait(700);
+
+    // Insert weird msg
+    if (
+      i !== memories.length - 1 &&
+      (i % 3 === 1 || Math.random() > 0.78)
+    ) {
+      await addInterruption();
+    }
+
+    await wait(350);
+  }
+
+  if (!stopped) {
+    archiveStatus.textContent =
+      "MEMORY RECOVERY COMPLETE // 044 FILES FOUND";
+
+    await wait(1500);
+    await addInterruption();
+  }
+}
+
+runArchive();
+</script>
+</body>
+</html>
+
+
   
   <footer>
     
