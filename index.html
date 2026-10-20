@@ -631,6 +631,69 @@ footer span:first-child {
     scroll-behavior: auto !important;
   }
 }
+
+
+
+
+
+
+
+
+/* THE WIRED IS WATCHING */
+
+.horror-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #000;
+  cursor: none;
+}
+
+.horror-whisper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  color: rgba(165, 255, 0, 0.13);
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  text-shadow: 0 0 5px rgba(165, 255, 0, 0.08);
+}
+
+
+
+
+
+/* wired is watchign */
+.horror-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #000;
+  cursor: none;
+}
+
+.horror-whisper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  color: rgba(165, 255, 0, 0.13);
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  text-shadow: 0 0 5px rgba(165, 255, 0, 0.08);
+}
+
+
+
+
+
 </style>
 </head>
 
@@ -829,6 +892,33 @@ passwordForm.addEventListener("submit", function(event) {
   }
 });
 
+
+    // AFTER THE 5TH wrong atemp (Js)
+    if (wrongAttempts === 5) {
+      setTimeout(function() {
+        // screen go black
+        const horrorScreen = document.createElement("div");
+        horrorScreen.className = "horror-screen";
+        document.body.appendChild(horrorScreen);
+
+        // create creepy msg
+        const whisper = document.createElement("div");
+        whisper.className = "horror-whisper";
+        whisper.textContent =
+          "i see u :)   dont look behind u   dont open ur closet...";
+        horrorScreen.appendChild(whisper);
+
+        // msg following mouyse
+        document.addEventListener("mousemove", function(event) {
+          whisper.style.left = (event.clientX + 14) + "px";
+          whisper.style.top = (event.clientY + 14) + "px";
+        });
+
+        // start message in the center
+        whisper.style.left = "50%";
+        whisper.style.top = "50%";
+      }, 1200);
+    }
 
 
 const destination = "https://jfoijfiojfoidj.com";
