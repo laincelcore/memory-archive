@@ -772,7 +772,9 @@ footer span:first-child {
 </div>
 
 <script>
+  
 /* password */
+
 
 const correctPassword = "strange";
 
@@ -795,14 +797,18 @@ const wrongMessages = [
 passwordForm.addEventListener("submit", function(event) {
   event.preventDefault();
 
-  if (passwordInput.value === correctPassword) {
+  const enteredPassword = passwordInput.value.trim();
+
+  if (enteredPassword === correctPassword) {
     authenticated = true;
 
     passwordError.textContent = "ACCESS GRANTED.";
     passwordError.style.color = "#a5ff00";
-    passwordInput.disabled = true;
 
-    setTimeout(() => {
+    passwordInput.disabled = true;
+    passwordForm.querySelector("button").disabled = true;
+
+    setTimeout(function() {
       passwordScreen.classList.add("hidden");
       startDiary();
     }, 450);
@@ -824,7 +830,6 @@ passwordForm.addEventListener("submit", function(event) {
 });
 
 
- */
 
 const destination = "https://jfoijfiojfoidj.com";
 
@@ -1056,7 +1061,7 @@ async function startCorruptedLoading() {
     "reality check: inconclusive.",
     "who is reading this file?",
     "connection established.",
-    "welcome to the wired."
+    "welcome to the ???."
   ];
 
   for (let i = 0; i < messages.length; i++) {
