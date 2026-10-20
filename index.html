@@ -1,277 +1,250 @@
+
 <!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050706">
-  <title>MEMORY ARCHIVE // WIRED484</title>
-  
-  <style>
-:root{--bg:#050706;
-      --green:#a5ff00;
-      --pink:#f05bff;
-      --muted:#7d897b;
-      --panel:#0b100d;
-      --line:#263526}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050706">
+<title>MEMORY ARCHIVE // WIRED484</title>
 
-    
-*{box-sizing:border-box;margin:0;padding:0}
-    
-body{background:var(--bg);
-     color:#e5eee4;
-     font-family:"Courier New",monospace;
-     min-height:100vh;
-     overflow-x:hidden}
-    
-body:before{content:"";
-            position:fixed;
-            inset:0;
-            z-index:10;
-            pointer-events:none;
-            opacity:.12;
-            background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,#b5ffc0 4px)}
-    
-body:after{content:"";
-           position:fixed;
-           inset:0;
-           z-index:-1;
-           pointer-events:none;
-           background:radial-gradient(ellipse at 75% 40%,#32103c 0%,transparent 40%),radial-gradient(ellipse at 15% 80%,#163009 0%,transparent 35%)}
-    
-a{color:inherit;
-  text-decoration:none}
-    
-nav{position:relative;
-    z-index:20;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:18px;
-    flex-wrap:wrap;
-    padding:24px 7%;
-    border-bottom:1px solid var(--line);
-    background:#050706dd}
-    
-.logo{color:var(--green);
-      font-weight:bold;
-      letter-spacing:3px;
-      text-shadow:0 0 12px #a5ff0066}
-    
-.nav-links{display:flex;
-           gap:18px;
-           flex-wrap:wrap;
-           font-size:10px;
-           color:var(--muted)}
-    
-.nav-links a:hover{color:var(--pink)}
-    
-main{padding:75px 7%;min-height:75vh}
-    
-.status,.eyebrow{font-size:11px;
-                 letter-spacing:3px;
-                 color:var(--green);
-            margin-bottom:24px}
-    
-.status:before{content:"● ";
-               animation:blink 1s steps(2) infinite}
-    
-h1{font-size:clamp(45px,9vw,95px);
-   line-height:.92;
-   letter-spacing:-5px;
-   color:#edf5eb;
-   text-shadow:4px 0 var(--pink),-3px 0 #a5ff0066;
-   margin-bottom:28px;
-   animation:flicker 5s infinite}
-    
-h1 span{display:block;
-        color:var(--green);
-        font-size:.35em;
-        letter-spacing:4px;
-        margin-top:22px;
-        line-height:1.5}
-    
-h2{font-size:clamp(27px,5vw,43px);
-   font-weight:normal;
-   margin-bottom:18px}
-    
-.description{max-width:650px;
-             color:#929d90;
-             font-size:13px;
-             line-height:2;
-             margin-bottom:30px}
-    
-.panel{border:1px solid #334b2d;
-       background:#080d08;
-       padding:25px;
-       max-width:760px;
-       margin-top:25px}
-    
-.panel-head{color:var(--pink);
-            font-size:11px;
-            border-bottom:1px solid var(--line);
-            padding-bottom:15px;
-            margin-bottom:18px}
-    
-.data{display:grid;
-      grid-template-columns:165px 1fr;gap:15px;
-      padding:12px 0;border-bottom:1px dashed var(--line);
-      font-size:12px;line-height:1.8}
-    
-.data:last-child{border-bottom:0}
-    .key{color:var(--green)}
-    .value{color:#b6beb3}
-    
-.tags{display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:18px}
-    
-    .tag{border:1px solid #334b2d;
-         color:var(--green);
-         padding:9px 12px;
-         font-size:11px}
-    
-.memory-grid{display:grid;
-             grid-template-columns:repeat(2,minmax(0,1fr));
-             gap:15px;margin-top:25px}
-    
-.memory{border:1px solid var(--line);
-        background:#090d0a;
-        padding:22px;
-        min-height:155px}
-    
-.date{font-size:10px;
-      color:var(--green);
-      margin-bottom:18px}
-    .memory h3{color:var(--pink);
-               font-size:15px;
-               margin-bottom:12px}
-    .memory p{color:#899287;
-              font-size:12px;
-              line-height:1.9}
-
-    
-.quote{border-left:2px solid var(--pink);
-       padding:12px 0 12px 24px;
-       margin-top:35px;
-       color:#c5b4c7;
-       line-height:2;
-       font-size:13px;
-       max-width:650px}
-    
-.btn{display:inline-block;
-     border:1px solid var(--green);
-     color:var(--green);
-     padding:13px 18px;
-     font:inherit;
-     font-size:11px;background:transparent;
-     margin-top:28px}
-    
-.btn:hover{background:var(--green);
-           color:#050706}
-    
-footer{border-top:1px solid var(--line);
-       padding:28px 7%;
-       display:flex;
-       justify-content:space-between;
-       flex-wrap:wrap;
-       gap:15px;
-       color:#687364;
-       font-size:10px;
-       letter-spacing:1px}
-    
-footer span{color:var(--green)}
-    
-@keyframes blink{50%{opacity:0}}@keyframes flicker{0%,94%,96%,100%{opacity:1}95%{opacity:.65}97%{opacity:.85}}
-    
-@media(max-width:700px){nav{padding:20px 5%}main{padding:60px 6%}h1{letter-spacing:-3px}
-                        .data{grid-template-columns:1fr;gap:3px}
-                        .memory-grid{grid-template-columns:1fr}
-                        .nav-links{gap:12px;font-size:9px}}
-    
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important}}
-
-
-
-
-/* typinh animation */
-
-.memory-grid {
-  align-items: start;
+<style>
+:root {
+  --bg: #050706;
+  --green: #a5ff00;
+  --pink: #f05bff;
+  --muted: #7d897b;
+  --panel: #0b100d;
+  --line: #263526;
 }
 
-.memory {
-  position: relative;
-  overflow: hidden;
-  overflow-wrap: anywhere;
-  min-width: 0;
-  opacity: 0;
-  transform: translateY(8px);
-  animation: memoryAppear .5s ease forwards;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.memory::after {
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: #e5eee4;
+  font-family: "Courier New", monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
   content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #f05bff0c,
-    #a5ff000b,
-    transparent
+  opacity: .12;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    #b5ffc0 4px
   );
-  animation: memoryScan 7s linear infinite;
 }
 
-.memory h3,
-.memory p {
-  overflow-wrap: anywhere;
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 75% 40%, #32103c 0%, transparent 40%),
+    radial-gradient(ellipse at 15% 80%, #163009 0%, transparent 35%);
 }
 
-.memory h3 {
-  line-height: 1.7;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.memory p {
-  min-height: 45px;
+nav {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 24px 7%;
+  border-bottom: 1px solid var(--line);
+  background: #050706dd;
 }
 
-.archive-loading {
-  grid-column: 1 / -1;
-  padding: 25px 0;
+.logo {
   color: var(--green);
-  font-size: 11px;
-  letter-spacing: 2px;
-  animation: flicker 2s infinite;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-shadow: 0 0 12px #a5ff0066;
 }
 
-.loading-dot {
+.logo span {
   color: var(--pink);
 }
 
-.archive-status {
-  margin-top: 20px;
+.nav-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
   font-size: 10px;
-  letter-spacing: 2px;
   color: var(--muted);
 }
 
-.memory.corrupted {
-  border-color: var(--pink);
-  animation: memoryAppear .5s ease forwards, corruptionGlitch .3s steps(2) 2;
+.nav-links a {
+  transition: color .2s;
 }
 
-.memory.corrupted h3 {
-  color: var(--green);
-  text-shadow: 2px 0 var(--pink);
-}
-
-.memory.corrupted p {
+.nav-links a:hover {
   color: var(--pink);
+}
+
+main {
+  padding: 75px 7%;
+  min-height: 75vh;
+}
+
+.status,
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--green);
+  margin-bottom: 24px;
+}
+
+.status::before {
+  content: "● ";
+  animation: blink 1s steps(2) infinite;
+}
+
+h1 {
+  font-size: clamp(38px, 8vw, 85px);
+  line-height: 1;
+  letter-spacing: -4px;
+  color: #edf5eb;
+  text-shadow: 4px 0 var(--pink), -3px 0 #a5ff0066;
+  margin-bottom: 28px;
+  overflow-wrap: anywhere;
+  animation: flicker 5s infinite;
+}
+
+h1 span {
+  display: block;
+  color: var(--green);
+  font-size: .3em;
+  letter-spacing: 4px;
+  margin-top: 22px;
+  line-height: 1.7;
+}
+
+.description {
+  max-width: 650px;
+  color: #929d90;
+  font-size: 13px;
+  line-height: 2;
+  margin-bottom: 30px;
+}
+
+.quote {
+  border-left: 2px solid var(--pink);
+  padding: 12px 0 12px 24px;
+  margin-top: 35px;
+  color: #c5b4c7;
+  line-height: 2;
+  font-size: 13px;
+  max-width: 650px;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 13px 18px;
+  font: inherit;
+  font-size: 11px;
+  background: transparent;
+  margin-top: 28px;
+  transition: .2s;
+}
+
+.btn:hover {
+  background: var(--green);
+  color: #050706;
+}
+
+/* DIGITAL DIARY CHAT */
+
+.memory-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 760px;
+  margin-top: 25px;
+  min-width: 0;
+}
+
+.diary-message {
+  width: fit-content;
+  max-width: 92%;
+  min-width: 0;
+  padding: 14px 17px;
+  border: 1px solid var(--line);
+  background: #080d08;
+  overflow-wrap: anywhere;
+  animation: memoryAppear .2s ease both;
+}
+
+.diary-message.you {
+  align-self: flex-end;
+  border-color: #334b2d;
+  margin-left: 8%;
+}
+
+.diary-message.system {
+  align-self: flex-start;
+  border-left: 2px solid var(--green);
+  margin-right: 8%;
+}
+
+.diary-message .date {
+  margin-bottom: 8px;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.diary-message .sender {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+
+.diary-message.you .sender {
+  color: var(--pink);
+}
+
+.diary-message h3 {
+  font-size: 13px;
+  font-weight: normal;
+  color: #e5eee4;
+  line-height: 1.8;
+  margin-bottom: 6px;
+  overflow-wrap: anywhere;
+}
+
+.diary-message p {
+  color: #929d90;
+  font-size: 12px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
 }
 
 .memory-cursor {
@@ -281,99 +254,281 @@ footer span{color:var(--green)}
   margin-left: 3px;
   background: var(--green);
   vertical-align: middle;
-  animation: cursorBlink .7s steps(2) infinite;
+  animation: cursorBlink .5s steps(2) infinite;
 }
 
-.memory-separator {
-  grid-column: 1 / -1;
-  padding: 18px 0;
-  border-top: 1px dashed var(--line);
-  border-bottom: 1px dashed var(--line);
+/* UNKNOWN MESSAGE */
+
+.diary-message.interruption {
+  align-self: center;
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  border: 1px dashed var(--pink);
+  background: #100813;
   color: var(--pink);
-  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background .2s, color .2s, box-shadow .2s;
+}
+
+.diary-message.interruption .sender {
+  color: var(--pink);
+}
+
+.diary-message.interruption p {
+  color: var(--pink);
   letter-spacing: 4px;
+  line-height: 2;
+}
+
+.diary-message.interruption:hover {
+  box-shadow: 0 0 14px #f05bff33;
+}
+
+.diary-message.interruption.unlocked {
+  color: #050706;
+  background: var(--green);
+  border: 1px solid var(--green);
+  box-shadow: 0 0 20px #a5ff0066;
+  animation: unlockedGlitch .3s steps(2) 3;
+}
+
+.diary-message.interruption.unlocked .sender,
+.diary-message.interruption.unlocked p {
+  color: #050706;
+}
+
+.diary-message.interruption.unlocked p {
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.diary-message.interruption .date {
   overflow-wrap: anywhere;
 }
 
-.memory-separator span {
-  color: var(--muted);
-  letter-spacing: 1px;
+.archive-status {
+  max-width: 760px;
+  margin-top: 22px;
   font-size: 10px;
+  letter-spacing: 2px;
+  line-height: 2;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+/* CORRUPTED LOADING SCREEN */
+
+.corrupted-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #050706;
+  color: var(--green);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  text-align: center;
+  font-family: "Courier New", monospace;
+  overflow: hidden;
+}
+
+.corrupted-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .2;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    var(--pink) 4px
+  );
+}
+
+.corrupted-screen h2 {
+  position: relative;
+  color: var(--pink);
+  font-size: clamp(22px, 5vw, 38px);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  animation: flicker .15s infinite;
+}
+
+.corrupted-screen p {
+  position: relative;
+  font-size: 11px;
+  line-height: 2.2;
+  margin-top: 18px;
+  color: var(--green);
+  overflow-wrap: anywhere;
+}
+
+.corrupted-bar {
+  position: relative;
+  width: min(360px, 90%);
+  height: 5px;
+  border: 1px solid var(--green);
+  margin-top: 25px;
+}
+
+.corrupted-bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--pink);
+}
+
+.corrupted-bar span.loading {
+  animation: corruptedLoad 2.4s steps(12) forwards;
+}
+
+.corrupted-error {
+  color: var(--pink) !important;
+  text-shadow: 2px 0 var(--green);
+}
+
+/* FOOTER */
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 28px 7%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  color: #687364;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+footer span {
+  color: var(--green);
+}
+
+/* ANIMATIONS */
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes flicker {
+  0%, 94%, 96%, 100% { opacity: 1; }
+  95% { opacity: .65; }
+  97% { opacity: .85; }
 }
 
 @keyframes memoryAppear {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes memoryScan {
-  0% { left: -100%; }
-  20%, 100% { left: 150%; }
-}
-
-@keyframes corruptionGlitch {
-  0% { transform: translateX(-3px); }
-  50% { transform: translateX(3px); filter: brightness(1.8); }
-  100% { transform: translateX(0); }
-}
-
 @keyframes cursorBlink {
   50% { opacity: 0; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .memory,
-  .memory::after,
-  .memory-separator,
-  .memory-cursor,
-  .archive-loading {
-    animation: none !important;
-    opacity: 1;
-    transform: none;
-  }
+@keyframes corruptedLoad {
+  to { width: 100%; }
 }
 
+@keyframes unlockedGlitch {
+  0% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
 
+@media(max-width:700px) {
+  nav { padding: 20px 5%; }
+  main { padding: 55px 6%; }
+  h1 { letter-spacing: -2px; }
+  .nav-links { gap: 12px; font-size: 9px; }
+  .diary-message { max-width: 96%; padding: 12px; }
+  .diary-message.you { margin-left: 4%; }
+  .diary-message.system { margin-right: 4%; }
+  footer { padding: 24px 6%; }
+}
 
-    
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
 </style>
 </head>
-  
+
 <body>
-  <nav>
-    <a href="index.html" class="logo">WIRED<span>//</span>484</a>
-    <div class="nav-links"><a href="https://laincelcore.github.io/wired/">HOME</a>
-      <a href="https://laincelcore.github.io/layer01/">LAYER 01</a>
-      <a href="https://laincelcore.github.io/layer02/">LAYER 02</a>
-      <a href="https://laincelcore.github.io/memory-archive/">MEMORY ARCHIVE</a>
-    </div>
-  
-  </nav>
-  
-  <main>
-<div class="status">MEMORY STORAGE FOUND</div><div class="eyebrow">ARCHIVE 03 // PERSONAL LOGS</div>
-<h1>MEMORY ARCHIVE<span>FRAGMENTS OF TIME_</span></h1>
-<p class="description">Not every memory has to be important to be worth keeping. .</p>
 
-<div class="memory-grid" id="memoryGrid">
-  <div class="archive-loading">
-    <span class="loading-dot">●</span> ACCESSING MEMORY STORAGE...
+<nav>
+  <a href="https://laincelcore.github.io/wired/" class="logo">
+    WIRED<span>//</span>484
+  </a>
+
+  <div class="nav-links">
+    <a href="https://laincelcore.github.io/wired/">HOME</a>
+    <a href="https://laincelcore.github.io/layer01/">LAYER 01</a>
+    <a href="https://laincelcore.github.io/layer02/">LAYER 02</a>
+    <a href="https://laincelcore.github.io/memory-archive/">MEMORY ARCHIVE</a>
   </div>
-</div>
-<div class="archive-status" id="archiveStatus">
-  MEMORY RECOVERY: 0 / 044
-</div>
+</nav>
 
-</div>
-    <div class="quote">Memory is imperfect. Maybe that's what makes it ours.</div><a class="btn" href="https://laincelcore.github.io/wired/">← RETURN HOME</a>
-    
+<main>
+  <div class="status">MEMORY STORAGE FOUND</div>
+
+  <div class="eyebrow">ARCHIVE 03 // PERSONAL LOGS</div>
+
+  <h1>
+    MEMORY ARCHIVE
+    <span>DIGITAL DIARY // FRAGMENTS OF TIME_</span>
+  </h1>
+
+  <p class="description">
+    A record of little things I don't want to forget.
+    Some memories are ordinary. Some are not.
+    <br><br>
+    <span style="color:var(--green)">
+      root@wired:~$ opening personal_diary.log
+    </span>
+  </p>
+
+  <div class="memory-grid" id="memoryGrid"></div>
+
+  <div class="archive-status" id="archiveStatus">
+    DIARY CONNECTION: ESTABLISHING...
+  </div>
+
+  <p class="description" style="margin-top:18px">
+    // CLICK ANYWHERE TO RECEIVE AN UNKNOWN TRANSMISSION.
+  </p>
+
+  <div class="quote">
+    Memory is imperfect. Maybe that's what makes it ours.
+  </div>
+
+  <a class="btn" href="https://laincelcore.github.io/wired/">
+    ← RETURN HOME
+  </a>
 </main>
 
-
+<footer>
+  <div>WIRED//484 — <span>STAY CONNECTED.</span></div>
+  <div>PERSONAL DIGITAL ARCHIVE · 2026</div>
+</footer>
 
 <script>
+
+
 const memories = [
   ["TODAY I WALKED AT THE PARK AT NIGHT.", "The path was quiet. The streetlights made everything look unreal."],
   ["I DREW A TREE I SAW TODAY.", "I tried to remember every branch, even after I got home."],
@@ -421,170 +576,293 @@ const memories = [
   ["I AM WRITING THIS BEFORE I FORGET.", "If I read this again someday, I hope I remember how today felt."]
 ];
 
-const interruptions = [
-  "WHO IS REMEMBERING THIS?",
-  "THIS MEMORY DOES NOT BELONG TO YOU.",
-  "???",
-  "I SAW YOU AT THE PARK.",
-  "WHY DID YOU FORGET?",
-  "MEMORY FRAGMENT NOT FOUND.",
-  "YOU WERE NOT ALONE.",
-  "DO YOU REMEMBER ME?",
-  "THIS FILE WAS ALREADY HERE.",
-  "I REMEMBER SOMETHING DIFFERENT.",
-  "??? // USER UNKNOWN",
-  "STOP TRYING TO REMEMBER."
-];
+/*
+  to next websit
+*/
+const destination = "https://agbbyu.com";
 
 const grid = document.getElementById("memoryGrid");
 const archiveStatus = document.getElementById("archiveStatus");
 
-let logIndex = 0;
-let interruptionIndex = 0;
 let stopped = false;
+let isLoading = false;
+let interruptionCount = 0;
 
-function wait(ms) {
+function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function typeText(element, text, speed = 28) {
+// FAST TYPEWRITER
+function typeFast(element, text, speed = 5) {
   return new Promise(resolve => {
     let i = 0;
+
     const cursor = document.createElement("span");
     cursor.className = "memory-cursor";
+
     element.textContent = "";
     element.appendChild(cursor);
 
-    function typeNext() {
+    function next() {
       if (stopped || !element.isConnected) {
         cursor.remove();
         resolve();
         return;
       }
 
+      const chunk = text.slice(i, i + 3);
+
+      cursor.before(document.createTextNode(chunk));
+      i += chunk.length;
+
       if (i < text.length) {
-        element.insertBefore(
-          document.createTextNode(text[i]),
-          cursor
-        );
-        i++;
-        setTimeout(typeNext, speed + Math.random() * 25);
+        setTimeout(next, speed);
       } else {
         cursor.remove();
         resolve();
       }
     }
 
-    typeNext();
+    next();
   });
 }
 
-async function addInterruption() {
-  const separator = document.createElement("div");
-  separator.className = "memory-separator";
-  grid.appendChild(separator);
+// CREATE EACH DIARY ENTRY
+async function addDiaryMessage(index) {
+  if (stopped) return;
 
-  const message = interruptions[
-    interruptionIndex % interruptions.length
-  ];
-  interruptionIndex++;
-
-  const line = document.createElement("div");
-  separator.appendChild(line);
-
-  const metadata = document.createElement("span");
-  metadata.textContent = " // SIGNAL INTERRUPTED";
-  separator.appendChild(document.createElement("br"));
-  separator.appendChild(metadata);
-
-  await typeText(line, message, 65);
-
-  await wait(900);
-
-  // Sometimes the message corrupts
-  if (Math.random() > 0.55) {
-    line.textContent = "???";
-    separator.classList.add("corrupted");
-  }
-
-  await wait(1000);
-}
-
-async function addMemory(index) {
   const [title, description] = memories[index];
 
   const card = document.createElement("article");
-  card.className = "memory";
-  card.style.animationDelay = "0s";
+  card.className = "diary-message you";
 
   const date = document.createElement("div");
   date.className = "date";
-  date.textContent = "LOG_" +
-    String(index + 1).padStart(3, "0") +
-    " // " + new Date().toLocaleDateString();
+  date.textContent =
+    "LOG_" + String(index + 1).padStart(3, "0") +
+    " // " + new Date().toLocaleTimeString();
+
+  const sender = document.createElement("div");
+  sender.className = "sender";
+  sender.textContent = "YOU // PERSONAL DIARY";
 
   const heading = document.createElement("h3");
   const paragraph = document.createElement("p");
 
-  card.append(date, heading, paragraph);
+  card.append(date, sender, heading, paragraph);
   grid.appendChild(card);
 
-  await typeText(heading, title, 24);
-  await wait(250);
-  await typeText(paragraph, description, 17);
+  await typeFast(heading, title, 5);
+  await typeFast(paragraph, description, 3);
+
+  if (stopped) return;
 
   archiveStatus.textContent =
-    "MEMORY RECOVERY: " +
-    String(index + 1).padStart(2, "0") +
-    " / 044";
+    "DIARY LOGS: " +
+    String(index + 1).padStart(3, "0") +
+    " / 044 // CONNECTION ACTIVE";
 
-  // Keep 
   card.scrollIntoView({
     behavior: "smooth",
     block: "nearest"
   });
 }
 
-async function runArchive() {
-  grid.innerHTML = "";
+// CREATE UNKNOWN MESSAGE
+function createInterruption() {
+  if (isLoading) return;
 
+  interruptionCount++;
+
+  const card = document.createElement("article");
+  card.className = "diary-message interruption";
+  card.setAttribute("role", "button");
+  card.setAttribute("tabindex", "0");
+  card.setAttribute("aria-label", "Unknown message. Click three times to unlock.");
+
+  const date = document.createElement("div");
+  date.className = "date";
+  date.textContent = new Date().toLocaleTimeString();
+
+  const sender = document.createElement("div");
+  sender.className = "sender";
+  sender.textContent = "UNKNOWN SENDER // ???";
+
+  const message = document.createElement("p");
+  message.textContent = "???";
+
+  const hint = document.createElement("div");
+  hint.className = "date";
+  hint.style.marginTop = "10px";
+  hint.textContent = "CLICKS: 0 / 3";
+
+  card.append(date, sender, message, hint);
+  grid.appendChild(card);
+
+  let clicks = 0;
+  let unlocked = false;
+
+  function handleMessageClick(event) {
+    event.stopPropagation();
+
+    if (isLoading) return;
+
+    if (unlocked) {
+      startCorruptedLoading();
+      return;
+    }
+
+    clicks++;
+
+    hint.textContent = "CLICKS: " + clicks + " / 3";
+
+    if (clicks >= 3) {
+      unlocked = true;
+      card.classList.add("unlocked");
+
+      sender.textContent = "UNKNOWN SENDER // IDENTIFIED";
+      message.textContent = "OPEN THE OTHER SIDE ↗";
+      hint.textContent = "ACCESS GRANTED // CLICK TO ENTER";
+      card.setAttribute("aria-label", "Unlocked. Click to open the destination.");
+    }
+  }
+
+  card.addEventListener("click", handleMessageClick);
+
+  card.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleMessageClick(event);
+    }
+  });
+
+  card.scrollIntoView({
+    behavior: "smooth",
+    block: "nearest"
+  });
+}
+
+// CLICK ANYWHERE TO RECEIVE A TRANSMISSION
+document.addEventListener("click", event => {
+  if (isLoading) return;
+
+  // Dont generate an extra message when clicking an existing ???
+  if (event.target.closest(".interruption")) return;
+
+  // Ignore navigation and other interactive controls
+  if (event.target.closest("a, button, input, textarea, select")) return;
+
+  createInterruption();
+});
+
+// automatic diary
+async function startDiary() {
   for (let i = 0; i < memories.length; i++) {
     if (stopped) return;
 
-    await addMemory(i);
-    await wait(700);
+    await addDiaryMessage(i);
 
-    // Insert weird msg
-    if (
-      i !== memories.length - 1 &&
-      (i % 3 === 1 || Math.random() > 0.78)
-    ) {
-      await addInterruption();
-    }
+    if (stopped) return;
 
-    await wait(350);
+    await sleep(180);
   }
 
-  if (!stopped) {
-    archiveStatus.textContent =
-      "MEMORY RECOVERY COMPLETE // 044 FILES FOUND";
-
-    await wait(1500);
-    await addInterruption();
-  }
+  archiveStatus.textContent =
+    "044 LOGS RECOVERED // DIARY SESSION COMPLETE";
 }
 
-runArchive();
+// corup loading type shi
+function startCorruptedLoading() {
+  if (isLoading) return;
+
+  isLoading = true;
+  stopped = true;
+
+  const screen = document.createElement("div");
+  screen.className = "corrupted-screen";
+
+  const title = document.createElement("h2");
+  title.id = "corruptTitle";
+  title.textContent = "MEMORY CORRUPTION";
+
+  const text = document.createElement("p");
+  text.id = "corruptText";
+  text.innerHTML =
+    "ACCESSING UNKNOWN DESTINATION...<br>" +
+    "RECOVERING LOST DATA...<br>" +
+    "IDENTITY CHECK: FAILED";
+
+  const bar = document.createElement("div");
+  bar.className = "corrupted-bar";
+
+  const fill = document.createElement("span");
+  bar.appendChild(fill);
+
+  const percent = document.createElement("p");
+  percent.id = "corruptPercent";
+  percent.textContent = "LOADING: 0%";
+
+  screen.append(title, text, bar, percent);
+  document.body.appendChild(screen);
+
+  requestAnimationFrame(() => {
+    fill.classList.add("loading");
+  });
+
+  const glitches = [
+    "M3M0RY N0T F0UND",
+    "WHO IS ON THE OTHER SIDE?",
+    "USER IDENTITY: ???",
+    "REALITY CHECK: FAILED",
+    "C0NN3CT10N L0ST",
+    "DO YOU REMEMBER?"
+  ];
+
+  let progress = 0;
+
+  const timer = setInterval(() => {
+    progress = Math.min(
+      100,
+      progress + Math.floor(Math.random() * 18) + 8
+    );
+
+    percent.textContent = "LOADING: " + progress + "%";
+
+    if (Math.random() > 0.45) {
+      title.textContent =
+        glitches[Math.floor(Math.random() * glitches.length)];
+    }
+
+    if (Math.random() > 0.65) {
+      text.innerHTML =
+        "RECOVERING LOST DATA...<br>" +
+        "USER IDENTITY: ???<br>" +
+        "SIGNAL INTEGRITY: " +
+        (Math.random() > 0.5 ? "UNSTABLE" : "UNKNOWN");
+    }
+
+    if (progress >= 100) {
+      clearInterval(timer);
+
+      title.textContent = "REDIRECTING...";
+      title.classList.add("corrupted-error");
+
+      text.innerHTML =
+        "THE ARCHIVE IS NO LONGER AVAILABLE.<br>" +
+        "FOLLOWING UNKNOWN SIGNAL...";
+
+      percent.textContent = "CONNECTION TRANSFERRED.";
+
+      setTimeout(() => {
+        window.location.href = destination;
+      }, 600);
+    }
+  }, 250);
+}
+
+// Sutato
+startDiary();
 </script>
-</body>
-</html>
 
-
-  
-  <footer>
-    
-    <div>WIRED//404 — <span>STAY CONNECTED.</span></div><div>PERSONAL DIGITAL ARCHIVE · 2026</div>
-  
-  </footer>
 </body>
 </html>
