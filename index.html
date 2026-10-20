@@ -632,13 +632,6 @@ footer span:first-child {
   }
 }
 
-
-
-
-
-
-
-
 /* THE WIRED IS WATCHING */
 
 .horror-screen {
@@ -663,10 +656,6 @@ footer span:first-child {
   text-shadow: 0 0 5px rgba(165, 255, 0, 0.08);
 }
 
-
-
-
-
 /* wired is watchign */
 .horror-screen {
   position: fixed;
@@ -689,11 +678,6 @@ footer span:first-child {
   user-select: none;
   text-shadow: 0 0 5px rgba(165, 255, 0, 0.08);
 }
-
-
-
-
-
 </style>
 </head>
 
@@ -835,9 +819,8 @@ footer span:first-child {
 </div>
 
 <script>
-  
-/* password */
 
+/* password */
 
 const correctPassword = "strange";
 
@@ -889,40 +872,40 @@ passwordForm.addEventListener("submit", function(event) {
 
     passwordInput.value = "";
     passwordInput.focus();
-  }
-});
 
-
-    // AFTER THE 5TH wrong atemp (Js)
+    // HORROR EFFECT AFTER THE FIFTH WRONG PASSWORD
     if (wrongAttempts === 5) {
+      passwordInput.disabled = true;
+      passwordForm.querySelector("button").disabled = true;
+
       setTimeout(function() {
-        // screen go black
+        // Make the screen completely black
         const horrorScreen = document.createElement("div");
         horrorScreen.className = "horror-screen";
         document.body.appendChild(horrorScreen);
 
-        // create creepy msg
+        // Create the faint creepy message
         const whisper = document.createElement("div");
         whisper.className = "horror-whisper";
         whisper.textContent =
           "i see u :)   dont look behind u   dont open ur closet...";
         horrorScreen.appendChild(whisper);
 
-        // msg following mouyse
+        // Position the message near the center at first
+        whisper.style.left = "50%";
+        whisper.style.top = "50%";
+
+        // Make the message follow the mouse
         document.addEventListener("mousemove", function(event) {
           whisper.style.left = (event.clientX + 14) + "px";
           whisper.style.top = (event.clientY + 14) + "px";
         });
-
-        // start message in the center
-        whisper.style.left = "50%";
-        whisper.style.top = "50%";
       }, 1200);
     }
-
+  }
+});
 
 const destination = "https://jfoijfiojfoidj.com";
-
 
 /* =digital diary */
 
@@ -984,8 +967,7 @@ let redirectStarted = false;
 const wait = ms =>
   new Promise(resolve => setTimeout(resolve, ms));
 
-
-/* fast typing effect*/
+/* fast typing effect */
 
 async function typeFast(element, text) {
   element.textContent = "";
@@ -996,8 +978,7 @@ async function typeFast(element, text) {
   }
 }
 
-
-/* wrte diary enty*/
+/* write diary entry */
 
 async function addMemory(text, index) {
   const message = document.createElement("div");
@@ -1037,8 +1018,7 @@ async function addMemory(text, index) {
     String(index + 1).padStart(3, "0") + " / 044";
 }
 
-
-/* hidden interuption*/
+/* hidden interruption */
 
 function addInterruption() {
   const message = document.createElement("div");
@@ -1071,8 +1051,7 @@ function addInterruption() {
   grid.appendChild(message);
 }
 
-
-/* tyep all diary entries*/
+/* type all diary entries */
 
 async function writeNextMemory() {
   if (memoryIndex >= memories.length) {
@@ -1092,8 +1071,7 @@ async function writeNextMemory() {
   }
 }
 
-
-/* start after authen*/
+/* start after authentication */
 
 function startDiary() {
   if (archiveStarted || !authenticated) return;
@@ -1104,8 +1082,7 @@ function startDiary() {
   writeNextMemory();
 }
 
-
-/* =click page to leave tace */
+/* click page to leave trace */
 
 document.addEventListener("click", function(event) {
   if (!authenticated || !archiveStarted || redirectStarted) {
@@ -1129,8 +1106,7 @@ document.addEventListener("click", function(event) {
   addInterruption();
 });
 
-
-/* corupte loasding */
+/* corrupted loading */
 
 async function startCorruptedLoading() {
   if (redirectStarted || !authenticated) return;
@@ -1178,4 +1154,3 @@ async function startCorruptedLoading() {
 
 </body>
 </html>
-
